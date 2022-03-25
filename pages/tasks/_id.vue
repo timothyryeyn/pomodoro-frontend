@@ -1,6 +1,28 @@
 <template>
-  <main class="pt-4 flex flex-col gap-y-8">
-    <Pomodoro />
+  <main class="pt-4 flex flex-col gap-y-8 pb-20">
+    <div
+      v-if="true"
+      class="bg-white bg-opacity-20 px-6 py-8 rounded-md md:w-3/4 lg:w-1/2 xl:w-1/3 md:self-center prose flex flex-col items-center"
+    >
+      <h1 class="text-center text-white font-bold">
+        Congratulations! You have successfully finished this task!
+      </h1>
+      <div class="flex flex-col gap-y-2 items-center">
+        <button
+          class="bg-white px-20 py-4 rounded-md text-2xl font-extrabold text-red-500 text-opacity-90 uppercase"
+        >
+          create new task
+        </button>
+        <span class="text-md font-medium text-white">OR</span>
+        <button
+          class="bg-white px-20 py-4 rounded-md text-2xl font-extrabold text-red-500 text-opacity-90 uppercase"
+        >
+          select existing task
+        </button>
+      </div>
+    </div>
+    <Pomodoro v-else />
+
     <div class="flex flex-col gap-y-6 items-center text-white">
       <div class="flex justify-center gap-x-4">
         <div class="flex flex-col gap-y-1 text-4xl items-center">

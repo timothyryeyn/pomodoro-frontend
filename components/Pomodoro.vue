@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-white bg-opacity-20 p-4 rounded-md">
+  <div
+    class="bg-white bg-opacity-20 px-6 py-8 rounded-md md:w-3/4 lg:w-1/2 xl:w-1/3 md:self-center"
+  >
     <pomodoro-tabs>
       <pomodoro-tab>
         <pomodoro-timer />

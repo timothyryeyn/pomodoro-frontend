@@ -1,5 +1,5 @@
 <template>
-  <main class="pb-20 px-2">
+  <main class="pb-20 px-2 flex flex-col">
     <app-form>
       <app-form-field
         name="title"
@@ -10,20 +10,20 @@
       <app-form-field
         name="description"
         label="description"
-        type="text"
+        type="textarea"
         placeholder="Enter task description"
       />
       <app-form-field
         name="pomodoro count"
         label="pomodoro count"
         type="number"
-        placeholder="number of pomodoros"
+        placeholder="Number of pomodoros"
       />
       <app-form-field
         name="pomodoro length"
         label="pomodoro length"
         type="number"
-        placeholder="length of pomodoro in minutes"
+        placeholder="Length of pomodoro in minutes"
       />
       <app-form-button>Add Task</app-form-button>
     </app-form>

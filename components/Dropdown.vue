@@ -13,7 +13,7 @@
       </svg>
     </button>
     <ul
-      class="bg-white p-1 absolute right-0 -bottom-12 rounded-md"
+      class="bg-white p-1 absolute right-0 -bottom-12 rounded-md border"
       v-show="opened"
     >
       <li
