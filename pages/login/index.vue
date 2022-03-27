@@ -1,6 +1,6 @@
 <template>
   <main class="flex flex-col gap-y-8">
-    <app-form>
+    <app-form @formSubmitted="userLogin">
       <app-form-field
         name="email"
         label="email"
@@ -22,8 +22,10 @@
     </app-form>
     <div class="flex flex-col gap-y-1 self-center items-center text-white">
       Do not have an account?
-      <a class="font-semibold underline text-lg text-white" href=""
-        >Create account</a
+      <nuxt-link
+        class="font-semibold underline text-lg text-white"
+        :to="{ name: 'register' }"
+        >Create account</nuxt-link
       >
     </div>
   </main>
@@ -35,6 +37,18 @@ import AppFormButton from '~/components/AppFormButton.vue'
 import AppFormField from '~/components/AppFormField.vue'
 export default {
   components: { AppForm, AppFormField, AppFormButton },
+  methods: {
+    async userLogin(credentials) {
+      try {
+        let response = await this.$auth.loginWith('local', {
+          data: credentials,
+        })
+        console.log(response)
+      } catch (err) {
+        console.error(err)
+      }
+    },
+  },
 }
 </script>
 

@@ -2,16 +2,25 @@
   <main class="flex flex-col gap-y-4 md:w-3/4 lg:w-1/2 md:self-center">
     <div class="border-b-2 flex justify-between pb-4">
       <div class="text-4xl font-bold text-white">Tasks</div>
-      <button
+      <nuxt-link
         class="bg-white bg-opacity-20 p-2 rounded-md font-medium text-white"
+        :to="{ name: 'tasks-create' }"
       >
         Create
-      </button>
+      </nuxt-link>
     </div>
     <div>
       <ul class="flex flex-col gap-y-2">
-        <task-item />
-        <li
+        <task-item
+          v-for="({ id, title, pomodoros_stats }, index) of tasks"
+          :key="id"
+          :title="title"
+          :pomodoroStats="pomodoros_stats"
+          :index="index"
+          :id="id"
+          @taskDeleted="deleteTask"
+        />
+        <!-- <li
           class="bg-white flex justify-between p-4 rounded-md text-gray-500 cursor-pointer"
         >
           <div class="flex gap-x-2 items-center">
@@ -22,7 +31,7 @@
             <div class="font-medium text-lg">5/10</div>
             <dropdown />
           </div>
-        </li>
+        </li> -->
       </ul>
     </div>
   </main>
@@ -31,8 +40,21 @@
 <script>
 import Dropdown from '~/components/Dropdown.vue'
 import TaskItem from '~/components/TaskItem.vue'
+
 export default {
   components: { Dropdown, TaskItem },
+  async asyncData({ $axios }) {
+    const data = await $axios.$get('/tasks')
+    console.log(data)
+    return { tasks: data.tasks }
+  },
+  methods: {
+    async deleteTask({ index, id }) {
+      this.tasks.splice(index, 1)
+      await this.$axios.$delete(`tasks/${id}`)
+      alert('Successfully Deleted!')
+    },
+  },
 }
 </script>
 

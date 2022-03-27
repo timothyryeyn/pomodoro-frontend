@@ -16,11 +16,7 @@
       class="bg-white p-1 absolute right-0 -bottom-12 rounded-md border"
       v-show="opened"
     >
-      <li
-        class="text-black p-1 hover:bg-black hover:bg-opacity-20 cursor-pointer rounded-md font-medium"
-      >
-        Delete
-      </li>
+      <slot></slot>
     </ul>
   </div>
 </template>

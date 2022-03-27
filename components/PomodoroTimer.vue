@@ -1,13 +1,18 @@
 <template>
   <div class="flex flex-col gap-y-8 items-center">
-    <div class="text-8xl text-white font-semibold">25:00</div>
+    <div class="text-8xl text-white font-semibold">{{ prettyTime }}</div>
     <div class="flex gap-x-4 items-center relative">
-      <button
-        class="bg-white px-20 py-4 rounded-md text-2xl font-extrabold text-red-500 text-opacity-90 uppercase"
+      <pomodoro-timer-button v-if="!isRunning" @click.native="start"
+        >start</pomodoro-timer-button
       >
-        stop
-      </button>
-      <button class="absolute -right-14 text-white">
+      <pomodoro-timer-button v-if="isRunning" @click.native="stop"
+        >stop</pomodoro-timer-button
+      >
+      <button
+        class="absolute -right-14 text-white"
+        v-if="isRunning"
+        @click="finish(true)"
+      >
         <svg
           class="fill-current h-12 w-12"
           xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +29,90 @@
 </template>
 
 <script>
-export default {}
+import PomodoroTimerButton from './PomodoroTimerButton.vue'
+export default {
+  components: { PomodoroTimerButton },
+  data() {
+    return {
+      minutes: 0,
+      seconds: 0,
+      time: 0,
+      timer: null,
+      isRunning: false,
+    }
+  },
+  props: ['name', 'length'],
+  computed: {
+    prettyTime() {
+      let time = this.time / 60
+      let minutes = parseInt(time)
+      let secondes = Math.round((time - minutes) * 60)
+      return minutes + ':' + secondes
+    },
+  },
+  watch: {
+    length(val) {
+      this.time = val
+    },
+  },
+  emits: ['timerEvent'],
+  methods: {
+    start() {
+      console.log('foo')
+      this.isRunning = true
+      if (!this.timer) {
+        this.timer = setInterval(() => {
+          if (this.time > 0) {
+            //persist time
+            this.time--
+          } else {
+            this.finish()
+          }
+        }, 1000)
+      }
+      this.emitTimerEvent(true, false, false)
+    },
+    stop() {
+      this.isRunning = false
+      clearInterval(this.timer)
+      this.timer = null
+      this.emitTimerEvent(false, false, false)
+    },
+    finish(forced = false) {
+      if (forced) {
+        if (!confirm('Stop current timer?')) {
+          return
+        }
+        forced = true
+      }
+      this.isRunning = false
+      clearInterval(this.timer)
+      this.timer = null
+      this.time = this.length
+      this.emitTimerEvent(true, true, forced)
+    },
+    reset() {
+      this.isRunning = false
+      clearInterval(this.timer)
+      this.timer = null
+      this.time = this.length
+      this.emitTimerEvent(false, false, false)
+    },
+    emitTimerEvent(isRunning, isFinished, isForced) {
+      this.$emit('timerEvent', {
+        timerName: this.name,
+        isRunning: isRunning,
+        finished: {
+          isTrue: isFinished,
+          isForced: isForced,
+        },
+      })
+    },
+  },
+  created() {
+    this.time = this.length
+  },
+}
 </script>
 
 <style></style>

@@ -5,6 +5,7 @@
       class="bg-gray-100 px-6 py-4 placeholder-gray-400 rounded-md text-black text-xl"
       :name="name"
       :type="type"
+      :value="value"
       :placeholder="placeholder"
       cols="20"
       rows="10"
@@ -15,6 +16,7 @@
       class="bg-gray-100 px-6 py-4 placeholder-gray-400 rounded-md text-black text-xl"
       :name="name"
       :type="type"
+      :value="value"
       :placeholder="placeholder"
       v-else
     />
@@ -23,7 +25,7 @@
 
 <script>
 export default {
-  props: ['type', 'placeholder', 'name', 'label'],
+  props: ['type', 'placeholder', 'name', 'label', 'value'],
   computed: {
     isTextarea() {
       return this.type == 'textarea'
