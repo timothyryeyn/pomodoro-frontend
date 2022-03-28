@@ -6,4 +6,8 @@ export const getters = {
   loggedInUser(state) {
     return state.auth.user
   },
+
+  currentRoute(state) {
+    return this.$route
+  },
 }

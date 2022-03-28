@@ -9,7 +9,7 @@
         >stop</pomodoro-timer-button
       >
       <button
-        class="absolute -right-14 text-white"
+        class="absolute -right-14 text-white hover:text-black"
         v-if="isRunning"
         @click="finish(true)"
       >
@@ -47,6 +47,9 @@ export default {
       let time = this.time / 60
       let minutes = parseInt(time)
       let secondes = Math.round((time - minutes) * 60)
+
+      secondes = secondes < 10 ? `0${secondes}` : secondes
+
       return minutes + ':' + secondes
     },
   },
@@ -58,7 +61,6 @@ export default {
   emits: ['timerEvent'],
   methods: {
     start() {
-      console.log('foo')
       this.isRunning = true
       if (!this.timer) {
         this.timer = setInterval(() => {

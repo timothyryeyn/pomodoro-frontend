@@ -63,6 +63,9 @@ export default {
     longBreakTimer() {
       return this.$refs.longBreak
     },
+    willTakeLongBreak() {
+      return this.pomodoros % 4 === 0
+    },
   },
   props: ['pomodoroLength', 'shortBreakLength', 'longBreakLength'],
   emits: ['pomodoroFinished'],
@@ -92,13 +95,18 @@ export default {
         case 'pomodoro':
           this.pomodoros++
           this.tabs?.selectTab(
-            this.pomodoros > 0 && this.pomodoros % 4 === 0 ? 2 : 1,
+            this.pomodoros > 0 && this.willTakeLongBreak ? 2 : 1,
             true
           )
           this.$emit('pomodoroFinished')
+          new Notification(
+            `Time to take a ${this.willTakeLongBreak ? 'long' : 'short'} break!`
+          )
+
           break
         case 'short break':
         case 'long break':
+          new Notification('Time to work!')
           this.tabs?.selectTab(0, true)
           break
       }

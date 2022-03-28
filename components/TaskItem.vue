@@ -1,17 +1,19 @@
 <template>
   <nuxt-link
-    class="bg-white flex justify-between p-4 rounded-md text-gray-800 cursor-pointer"
+    class="bg-white flex justify-between p-4 rounded-md cursor-pointer group hover:bg-black"
     :to="{ name: 'tasks-id', params: { id } }"
   >
-    <div class="text-xl font-semibold">{{ title }}</div>
+    <div class="text-xl font-semibold group-hover:text-white">{{ title }}</div>
     <div class="flex gap-x-2 items-center">
-      <div class="font-medium text-lg">{{ displayStats }}</div>
+      <div class="font-medium text-lg group-hover:text-white">
+        {{ displayStats }}
+      </div>
       <dropdown
         ><dropdown-item @click.native.prevent="clickEditHandler"
           >Edit</dropdown-item
         >
         <dropdown-item @click.native.prevent="clickDeleteHandler"
-          >Delete</dropdown-item
+          ><span class="text-red-600">Delete</span></dropdown-item
         >
       </dropdown>
     </div>

@@ -1,5 +1,7 @@
 <template>
-  <div class="relative flex text-red-500 text-opacity-90">
+  <div
+    class="relative flex text-red-500 text-opacity-90 group-hover:text-white"
+  >
     <button @click.prevent="opened = !opened">
       <svg
         class="fill-current h-6 w-6"

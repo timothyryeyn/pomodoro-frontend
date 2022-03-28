@@ -6,14 +6,14 @@
       >
       <div class="flex gap-x-2" v-if="isAuthenticated">
         <nuxt-link
-          class="bg-white bg-opacity-20 p-2 rounded-md font-medium text-white"
+          class="bg-white bg-opacity-20 p-2 rounded-md font-medium text-white hover:bg-opacity-40"
           v-for="({ name, link }, index) of authNavLinks"
           :key="index"
           :to="link"
           >{{ name }}</nuxt-link
         >
         <button
-          class="bg-white bg-opacity-20 p-2 rounded-md font-medium text-white"
+          class="bg-white bg-opacity-20 p-2 rounded-md font-medium text-white hover:bg-opacity-40"
           @click="userLogout"
         >
           Logout
@@ -21,7 +21,7 @@
       </div>
       <div class="flex gap-x-2" v-else>
         <nuxt-link
-          class="bg-white bg-opacity-20 p-2 rounded-md font-medium text-white"
+          class="bg-white bg-opacity-20 p-2 rounded-md font-medium text-white hover:bg-opacity-40"
           v-for="({ name, link }, index) of guestNavLinks"
           :key="index"
           :to="link"
@@ -59,6 +59,9 @@ export default {
     async userLogout() {
       await this.$auth.logout()
     },
+  },
+  created() {
+    console.log(this.$route)
   },
 }
 </script>

@@ -9,14 +9,14 @@
       </h1>
       <div class="flex flex-col gap-y-2 items-center">
         <nuxt-link
-          class="bg-white px-20 py-4 rounded-md text-2xl font-extrabold text-red-500 text-opacity-90 uppercase"
+          class="bg-white px-20 py-4 rounded-md text-2xl font-extrabold text-red-500 text-opacity-90 uppercase text-center hover:bg-black hover:text-white"
           :to="{ name: 'tasks-create' }"
         >
           create new task
         </nuxt-link>
         <span class="text-md font-medium text-white">OR</span>
         <nuxt-link
-          class="bg-white px-20 py-4 rounded-md text-2xl font-extrabold text-red-500 text-opacity-90 uppercase"
+          class="bg-white px-20 py-4 rounded-md text-2xl font-extrabold text-red-500 text-opacity-90 uppercase text-center hover:bg-black hover:text-white"
           :to="{ name: 'tasks' }"
         >
           select existing task
