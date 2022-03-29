@@ -60,9 +60,6 @@ export default {
       await this.$auth.logout()
     },
   },
-  created() {
-    console.log(this.$route)
-  },
 }
 </script>
 

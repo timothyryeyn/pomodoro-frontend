@@ -1,17 +1,26 @@
 <template>
   <div class="flex flex-col gap-y-8 items-center">
-    <div class="text-8xl text-white font-semibold">{{ prettyTime }}</div>
+    <div class="text-8xl text-white font-semibold">
+      {{ prettyTime }}
+    </div>
     <div class="flex gap-x-4 items-center relative">
-      <pomodoro-timer-button v-if="!isRunning" @click.native="start"
+      <pomodoro-timer-button
+        v-if="!isRunning"
+        @click.native="start"
+        id="start-button"
         >start</pomodoro-timer-button
       >
-      <pomodoro-timer-button v-if="isRunning" @click.native="stop"
+      <pomodoro-timer-button
+        v-if="isRunning"
+        @click.native="stop"
+        id="stop-button"
         >stop</pomodoro-timer-button
       >
       <button
         class="absolute -right-14 text-white hover:text-black"
         v-if="isRunning"
         @click="finish(true)"
+        id="finish-button"
       >
         <svg
           class="fill-current h-12 w-12"
